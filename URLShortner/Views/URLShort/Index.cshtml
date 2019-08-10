@@ -1,0 +1,60 @@
+﻿@model URLShortner.Models.CustomURL
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="~/Content/css/cover.css" rel="stylesheet" />
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="container">
+
+        <div class="panel-group" style="margin-top:50px;">
+            @using (Html.BeginForm("Index", "URLShort", FormMethod.Post, new { enctype = "multipart/form-data", id = "MainForm" }))
+            {
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">URL Shortening</div>
+                    <div class="panel-body">
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.FullUrl, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                        </div>
+                        <div class="col-md-4">
+                            <input type="submit" name="btnSubmit" id="btnSubmit" value="Submit" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+
+                if (Model != null)
+                {
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">Input long URL is</div>
+                            <div class="col-md-9">
+                                <a href="@Model.FullUrl" target="_blank">@Model.FullUrl</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12"><hr></div>
+                        <div class="row">
+                            <div class="col-md-3"> Output Shortening URL is</div>
+                            <div class="col-md-9">
+                                <a href="@Model.shortUrl" target="_blank">@Model.shortUrl</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    }
+                }
+        </div>
+    </div>
+       
+</body>
+</html>
